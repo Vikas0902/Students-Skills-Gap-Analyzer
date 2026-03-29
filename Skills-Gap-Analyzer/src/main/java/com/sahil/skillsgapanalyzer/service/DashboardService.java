@@ -1,9 +1,14 @@
 package com.sahil.skillsgapanalyzer.service;
 
+import com.sahil.skillsgapanalyzer.dto.DashboardDataResponse;
+import com.sahil.skillsgapanalyzer.entity.Student;
+import com.sahil.skillsgapanalyzer.entity.StudentAttempt;
 import com.sahil.skillsgapanalyzer.integration.MlPredictionClient;
 import com.sahil.skillsgapanalyzer.repository.StudentAttemptRepository;
 import com.sahil.skillsgapanalyzer.repository.StudentRepository;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class DashboardService {
@@ -12,7 +17,7 @@ public class DashboardService {
     private final StudentAttemptRepository studentAttemptRepository;
     private final MlPredictionClient mlPredictionClient;
 
-//    Constructor Injection
+    //    Constructor Injection
     public DashboardService(StudentRepository studentRepository,
                             StudentAttemptRepository studentAttemptRepository,
                             MlPredictionClient mlPredictionClient){
@@ -29,7 +34,7 @@ public class DashboardService {
         List<StudentAttempt> history = studentAttemptRepository.findByStudent_IdOrderByActionNumAsc(studentId);
 
         if(history.isEmpty()){
-            throw new RuntimeException("No attempt history found for this student")
+            throw new RuntimeException("No attempt history found for this student");
         }
 
 //    --Calculate Overall Metrics
@@ -44,5 +49,6 @@ public class DashboardService {
         double recentAccuracy = (double) recentCorrect/recentCount;
 
 //     --Group by skill to calculate specific mastery
+
     }
 }
