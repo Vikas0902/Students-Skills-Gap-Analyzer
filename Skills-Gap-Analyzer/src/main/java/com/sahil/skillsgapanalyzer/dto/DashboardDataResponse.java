@@ -31,7 +31,7 @@ public class DashboardDataResponse {
         public List<String> workSkillsList;
         public List<String> stringSkillsList;
         public String learningPathRecommendation;
-        public String performancePrediction
+        public String performancePrediction;
     }
 
 }
